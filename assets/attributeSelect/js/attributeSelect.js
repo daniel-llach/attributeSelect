@@ -40,18 +40,21 @@ define([
               "input": "input"
             },
             events: {
+              "change @ui.input": "editPrior",
               "focusout @ui.input": "sorterPrior"
             },
-            sorterPrior: function(event){
+            editPrior: function(event){
               var prior = $(event.target).val();
               this.model.set({"prioridad": prior});
-              this.render();
               this.markup();
             },
             markup: function(){
               this.$el.css({
                 "background-color": "yellow"
               })
+            },
+            sorterPrior: function(){
+              this.render(); // gatilla sort collection
             }
 
         });
