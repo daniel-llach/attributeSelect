@@ -44,7 +44,7 @@ define([
               "focusout @ui.input": "sorterPrior"
             },
             editPrior: function(event){
-              var prior = $(event.target).val();
+              var prior = parseInt( $(event.target).val() );
               this.model.set({"prioridad": prior});
               this.markup();
             },
