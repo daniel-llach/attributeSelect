@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="assets/attributeSelect/css/attrSelect.css">
+        <!--<script src="js/ie/modernizr.js"></script> --><!-- CSS3 old browser support -->
+        <!--[if lt IE 9]>
+        <script src="js/ie/selectivizr.js"></script>
+        <script src="js/ie/html5.js"></script>
+        <script src="js/ie/ie9.js"></script>
+        <![endif]-->
+        <style>
+          #somediv
+          {
+              width: 275px;
+              height: 30px;
+              position: absolute;
+              left: 50%;
+              top: 20%;
+              -webkit-transform: translate( -50%, -50% );
+              -moz-transform: translate( -50%, -50% );
+              -o-transform: translate( -50%, -50% );
+              transform: translate( -50%, -50% );
+
+          }
+        </style>
+    </head>
+    <body>
+        <div id="somediv"></div>
+        <script data-main="js/main" src="bower_components/requirejs/require.js"></script>
+    </body>
+</html>
