@@ -51,8 +51,8 @@ define([
             events: {
               "change @ui.input": "editPrior",
               "focusout @ui.input": "sorterPrior",
-              "mouseenter": "toggleRemove",
-              "mouseleave": "toggleRemove",
+              "mouseenter": "showRemove",
+              "mouseleave": "removeRemove",
               "click @ui.remove": "removeOption"
             },
             editPrior: function(event){
@@ -63,16 +63,18 @@ define([
             markup: function(){
               this.$el.css({
                 "background-color": "#EBEF82"
-              })
+              });
             },
             sorterPrior: function(){
               this.render(); // gatilla sort collection
             },
-            toggleRemove: function(){
-              this.$el.find(".remove").toggleClass("show");
+            showRemove: function(){
+              this.$el.find(".remove").addClass("show");
+            },
+            removeRemove: function(){
+              this.$el.find(".remove").removeClass("show");
             },
             removeOption: function(){
-              console.log("destroy");
               this.model.collection.remove([{"cid": this.model.cid}]);
             }
 
