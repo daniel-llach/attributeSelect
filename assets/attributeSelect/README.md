@@ -7,10 +7,10 @@ attrselect.start({
     filtered: filterCollection
 });
 ```
-## models:
+1.- models:
   Must be a *Collection* with all models
 
-## filtered:
+2.- filtered:
   The same same *Collection* filtered with the actual selection
 
   *example:*
