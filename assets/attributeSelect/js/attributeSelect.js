@@ -111,7 +111,8 @@ define([
             // taglist
             var taglist = new TagList("taglist");
             taglist.start({
-                filtered: options.filtered
+                filtered: options.filtered,
+                toggle: false
             });
             var taglistChannel = Radio.channel("taglist");
             var taglistview = taglistChannel.request("get:root");

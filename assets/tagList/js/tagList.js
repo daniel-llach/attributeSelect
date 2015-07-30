@@ -19,6 +19,15 @@ define([
                 'title': this.model.get('nombre')
               };
             },
+            events: {
+              "click": "toggleSelect"
+            },
+            toggleSelect: function(){
+              if(TagList.toggle){
+                this.$el.toggleClass("unselected");
+              }
+            }
+
         });
 
         TagList.CollectionView = Marionette.CollectionView.extend({
@@ -28,6 +37,8 @@ define([
         });
 
         TagList.on("start", function(options){
+          TagList.toggle = options.toggle;
+
           // Collectionview
           TagList.collectionview = new TagList.CollectionView({collection: options.filtered});
 
