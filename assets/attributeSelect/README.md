@@ -1,5 +1,5 @@
 # AttributeSelect
-:rooster:
+:beer:
 Start example:
 ```javascript
 attrselect.start({
@@ -7,10 +7,10 @@ attrselect.start({
     filtered: filterCollection
 });
 ```
-1.- models:
+### models:
   Must be a *Collection* with all models
 
-2.- filtered:
+### filtered:
   The same same *Collection* filtered with the actual selection
 
   *example:*
