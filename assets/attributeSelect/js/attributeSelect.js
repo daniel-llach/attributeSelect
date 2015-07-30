@@ -2,9 +2,10 @@ define([
     "backbone.marionette",
     "backbone.radio",
     "radio.shim",
+    "../../taglist/js/taglist",
     "text!assets/attributeSelect/templates/attrselect.html",
     "text!assets/attributeSelect/templates/option.html"
-], function (Marionette, Radio, Shim, AttrSelectTemplate, OptionTemplate) {
+], function (Marionette, Radio, Shim, TagList, AttrSelectTemplate, OptionTemplate) {
 
     var AttrSelectConstructor = function(channelName){
 
@@ -50,7 +51,7 @@ define([
             },
             markup: function(){
               this.$el.css({
-                "background-color": "yellow"
+                "background-color": "#EBEF82"
               })
             },
             sorterPrior: function(){
@@ -81,28 +82,22 @@ define([
           AttrSelect.Channel.reply("get:root", function(){
             return AttrSelect.RootView;
           });
-          // Option > view > collectionview
 
           AttrSelect.RootView.on("show", function(){
+            // collectionview
             AttrSelect.RootView.getRegion("view").show(AttrSelect.collectionview);
+
+            // taglist
+            var taglist = new TagList("taglist");
+            taglist.start({
+                filtered: options.filtered
+            });
+            console.log("ok");
+            var taglistChannel = Radio.channel("taglist");
+            var taglistview = taglistChannel.request("get:root");
+            AttrSelect.RootView.getRegion("input").show(taglistview);
+
           });
-
-
-          console.log("options.models: ", options.models);
-          console.log("options.filtered: ", options.filtered);
-            // AttrSelect.optionCollection = options.models;
-            //
-            // AttrSelect.optionArrayPool = new OptionCollection();
-            // AttrSelect.optionArrayPool.reset(AttrSelect.optionCollection.toArray());
-            //
-            // AttrSelect.RootView = new AttrSelect.OptionCompositeView({
-            //     collection: AttrSelect.optionArrayPool,
-            //     displayKeys: options.displayKeys
-            // });
-            //
-            // AttrSelect.Channel.reply("get:root", function(){
-            //     return AttrSelect.RootView;
-            // });
         });
 
         return AttrSelect;
