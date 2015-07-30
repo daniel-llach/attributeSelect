@@ -3,9 +3,10 @@ define([
     "backbone.radio",
     "radio.shim",
     "../../taglist/js/taglist",
+    "../../typeahead/js/typeahead",
     "text!assets/attributeSelect/templates/attrselect.html",
     "text!assets/attributeSelect/templates/option.html"
-], function (Marionette, Radio, Shim, TagList, AttrSelectTemplate, OptionTemplate) {
+], function (Marionette, Radio, Shim, TagList, TypeAhead, AttrSelectTemplate, OptionTemplate) {
 
     var AttrSelectConstructor = function(channelName){
 
@@ -19,17 +20,23 @@ define([
             regions: {
               "input": ".input",
               "view": ".view",
-              "select": ".select"
+              "select": ".select .items"
             },
             ui: {
               "input": ".input",
-              "options": ".options"
+              "options": ".options",
+              "option": ".options .option",
+              "add": ".add"
             },
             events: {
-              "click @ui.input": "showOptions"
+              "click @ui.input": "showOptions",
+              "click @ui.add": "add"
             },
             showOptions: function(){
               this.ui.options.toggleClass("show");
+            },
+            add: function(){
+              alert('add');
             }
         });
 
@@ -38,11 +45,15 @@ define([
             className: "option",
             template: _.template(OptionTemplate),
             ui: {
-              "input": "input"
+              "input": "input",
+              "remove": ".remove"
             },
             events: {
               "change @ui.input": "editPrior",
-              "focusout @ui.input": "sorterPrior"
+              "focusout @ui.input": "sorterPrior",
+              "mouseenter": "toggleRemove",
+              "mouseleave": "toggleRemove",
+              "click @ui.remove": "removeOption"
             },
             editPrior: function(event){
               var prior = parseInt( $(event.target).val() );
@@ -56,6 +67,13 @@ define([
             },
             sorterPrior: function(){
               this.render(); // gatilla sort collection
+            },
+            toggleRemove: function(){
+              this.$el.find(".remove").toggleClass("show");
+            },
+            removeOption: function(){
+              console.log("destroy");
+              this.model.collection.remove([{"cid": this.model.cid}]);
             }
 
         });
@@ -77,7 +95,8 @@ define([
         AttrSelect.on("start", function(options){
           // LayoutView
           AttrSelect.RootView = new AttrSelect.LayoutView();
-          AttrSelect.collectionview = new AttrSelect.CollectionView({collection: options.filtered});
+          AttrSelect.filterview = new AttrSelect.CollectionView({collection: options.filtered});
+          console.log("AttrSelect.filterview: ", AttrSelect.filterview);
 
           AttrSelect.Channel.reply("get:root", function(){
             return AttrSelect.RootView;
@@ -85,17 +104,28 @@ define([
 
           AttrSelect.RootView.on("show", function(){
             // collectionview
-            AttrSelect.RootView.getRegion("view").show(AttrSelect.collectionview);
+            AttrSelect.RootView.getRegion("view").show(AttrSelect.filterview);
 
             // taglist
             var taglist = new TagList("taglist");
             taglist.start({
                 filtered: options.filtered
             });
-            console.log("ok");
             var taglistChannel = Radio.channel("taglist");
             var taglistview = taglistChannel.request("get:root");
             AttrSelect.RootView.getRegion("input").show(taglistview);
+
+            // typeAhead
+            var typeAhead = new TypeAhead("typeahead");
+            typeAhead.start({
+              // containerHeight: this.$el.outerHeight(),
+              separator: "__",
+              displayKeys: ["value"],
+              models: options.models.toArray()
+            });
+            var typeAheadChannel = Radio.channel("typeahead");
+            var typeAheadview = typeAheadChannel.request("get:root");
+            AttrSelect.RootView.getRegion("select").show(typeAheadview);
 
           });
         });

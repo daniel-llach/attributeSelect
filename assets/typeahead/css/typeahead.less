@@ -1,0 +1,202 @@
+//// setting custom class ////
+@font-face{font-family:'Open Sans';font-style:normal;font-weight:normal;src:local('Open Sans'),local('OpenSans'),url('../../css/fonts/OpenSans-Regular.ttf') format('truetype')}@font-face{font-family:'Open Sans';font-weight:300;src:local('Open Sans'),local('OpenSans'),url('../../css/fonts/OpenSans-Light.ttf') format('truetype')}@font-face{font-family:'Open Sans';font-weight:700;src:local('Open Sans'),local('OpenSans'),url('../../css/fonts/OpenSans-Bold.ttf') format('truetype')}
+
+.translate (@x: -50%, @y: -50%)
+{
+    -webkit-transform: translate( @x, @y );
+    -moz-transform: translate( @x, @y );
+    -o-transform: translate( @x, @y );
+    transform: translate( @x, @y );
+}
+
+.center
+{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  .translate(-50%, -50%);
+
+}
+
+.centerVertical
+{
+    position: absolute;
+    top: 50%;
+
+    .translate(0%, -50%);
+}
+
+.shadow(@s: 3px 3px 4px #444) {
+    -moz-box-shadow: @s;
+    -webkit-box-shadow: @s;
+    box-shadow: @s;
+}
+
+.border-radius(@radius: 10px)
+{
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+      -ms-border-radius: @radius;
+       -o-border-radius: @radius;
+          border-radius: @radius;
+}
+
+
+//////// STYLE ///////
+
+.typeahead
+{
+    font-family: 'Open Sans';
+    display: inline-block;
+    width: 100%;
+
+    > .searchbox
+    {
+        width: 100%;
+        position: relative;
+        float: left;
+
+        > input
+        {
+          width: 90%;
+          text-align: center;
+          color: #286186;
+          background: #fff;
+          border: 1px solid #ccc;
+          height: 25px;
+          padding: 0 5px;
+          font-size: 11px;
+          -webkit-appearance: none;
+          -webkit-border-radius: 0;
+          box-sizing: border-box;
+            // text-align: left;
+            // background-color: #fafbfe;
+            // color: #7899af;
+            // outline: none;
+            // font-size: 14px;
+            // width: 100%;
+            // border: none;
+            // padding: 9px 12px;
+            // box-sizing: border-box;
+
+        }
+
+        // > .mglass
+        // {
+        //     background-image: url(../img/mglass.svg);
+        //     background-size: 10px 10px;
+        //     background-position: center center;
+        //     background-repeat: no-repeat;
+        // }
+
+        .cancelSelected
+        {
+          display: none;
+          width: 10px;
+          height: 10px;
+          background-color: #f6f3f3;
+          right: 10%;
+          cursor: pointer;
+          background-image: url(../img/cancel.svg);
+          background-size: 6px;
+          background-position: center center;
+          background-repeat: no-repeat;
+          // top: 8px;
+          .centerVertical;
+          .border-radius(50%);
+        }
+    }
+
+    > .optionbox
+    {
+        display: none;
+        width: 100%;
+        position: fixed;
+        z-index: 999999;
+        .shadow(1px 3px 5px rgba(68, 68, 68, 0.23));
+        max-height: 200px;
+        // position: absolute;
+        // background: #f0f3f6;
+        // top: 35px;
+
+        > ul
+        {
+            padding: 0;
+            margin: 0;
+            max-height: 200px;
+            overflow-y: auto;
+
+            > li
+            {
+                list-style: none;
+                width: 100%;
+                padding: 2px 0;
+                box-sizing: border-box;
+                font-weight: 300;
+                cursor: default;
+
+                  color: #0E7290;
+
+
+                &:nth-child(odd) {
+                    background: #EFF1F6;
+                    border: 2px solid #EFF1F6;
+                }
+
+                &:nth-child(even) {
+                    background: #EAECF1;
+                    border: 2px solid #EAECF1;
+                }
+
+                &:hover
+                {
+                    background: #7899AE;
+                    color: #fff;
+                }
+
+                > span
+                {
+                  font-weight: 400;
+
+                    > span
+                    {
+                        // margin-right: 4px;
+                        font-size: 12px;
+                        text-transform: lowercase;
+
+                        // &:nth-child(1)
+                        // {
+                        //     text-transform: capitalize;
+                        //     font-weight: 700;
+                        //     font-size: 12px;
+                        //
+                        //     // &::after
+                        //     // {
+                        //     //     content: " : ";
+                        //     // }
+                        // }
+
+                    }
+                }
+            }
+
+            > .selected
+            {
+                background: #7899AE !important;
+                > span
+                {
+                  color: #fff !important;
+                }
+            }
+
+        }
+
+
+
+    }
+.show
+{
+    display: block !important;
+}
+}

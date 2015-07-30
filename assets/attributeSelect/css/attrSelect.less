@@ -131,6 +131,7 @@
 
         > .option
         {
+          position: relative;
           width: 100%;
           padding: 1px;
           background-color: #eff1f6;
@@ -153,6 +154,26 @@
           > span
           {
             margin: 0 3px;
+
+            > .remove
+            {
+              display: none;
+              position: absolute;
+              width: 26px;
+              height: 100%;
+              background: #f00;
+              top: 0;
+              right: 0;
+              cursor: pointer;
+              font-size: 10px;
+              font-weight: 700;
+              text-indent: 0;
+              text-align: center;
+              text-transform: uppercase;
+              color: #fff;
+              padding-top: 8px;
+              box-sizing: border-box;
+            }
           }
         }
       }
@@ -163,6 +184,7 @@
 
       > .add
       {
+        float: left;
         text-align: center;
         color: #fff;
         font-weight: 300;
@@ -181,6 +203,15 @@
           text-align: center;
           .center;
         }
+      }
+
+      > .items
+      {
+        float: left;
+        width: 84%;
+        position: relative;
+        left: 7%;
+        top: 7px;
       }
     }
   }
