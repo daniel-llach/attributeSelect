@@ -1,12 +1,12 @@
 # TagList
-Example:
+:beer: Start Example:
 ```javascript
 taglist.start({
     filtered: options.filtered,
     toggle: false
 });
 ```
-## filtered:
+### filtered:
   The *Collection* that you want to show (in this case is a filtered one).
-## toggle:
+### toggle:
   allow selectable interface to tags.
