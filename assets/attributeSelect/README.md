@@ -1,5 +1,5 @@
 # AttributeSelect
-/play yeah
+:rooster:
 Start example:
 ```javascript
 attrselect.start({
