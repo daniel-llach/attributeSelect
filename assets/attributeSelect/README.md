@@ -1,6 +1,7 @@
 # AttributeSelect
+/play yeah
 Start example:
-```
+```javascript
 attrselect.start({
     models: attrCollection,
     filtered: filterCollection
@@ -13,7 +14,7 @@ attrselect.start({
   The same same *Collection* filtered with the actual selection
 
   *example:*
-  ```
+  ```javascript
   var EmptyCollection = Backbone.Collection.extend();
   var attrCollection = new EmptyCollection(optionArray); // collection all
 

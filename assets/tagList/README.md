@@ -1,6 +1,6 @@
 # TagList
 Example:
-```
+```javascript
 taglist.start({
     filtered: options.filtered,
     toggle: false
